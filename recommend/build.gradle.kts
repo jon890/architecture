@@ -6,6 +6,8 @@ plugins {
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
     kotlin("plugin.jpa") version "1.9.23"
+
+    id("com.palantir.docker") version "0.35.0"
 }
 
 allOpen {
@@ -45,4 +47,12 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+docker {
+    println(tasks.bootJar.get().outputs.files)
+    name = rootProject.name + ":" + version
+    setDockerfile(file("./Dockerfile"))
+    files(tasks.bootJar.get().outputs.files)
+    buildArgs(mapOf("JAR_FILE" to tasks.bootJar.get().outputs.files.singleFile.name))
 }

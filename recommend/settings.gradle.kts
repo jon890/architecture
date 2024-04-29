@@ -1,1 +1,1 @@
-rootProject.name = "recommend"
+rootProject.name = "fos-recommend-service"

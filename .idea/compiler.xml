@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="bifos" target="17" />
+      <module name="bifos.main" target="17" />
+      <module name="bifos.test" target="17" />
+      <module name="recommend" target="17" />
+      <module name="recommend-service" target="17" />
+      <module name="recommend-service.main" target="17" />
+      <module name="recommend-service.test" target="17" />
+      <module name="recommend.main" target="17" />
+      <module name="recommend.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
