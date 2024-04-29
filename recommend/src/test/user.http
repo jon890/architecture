@@ -18,7 +18,11 @@ POST http://localhost:18080/api/v1/users
 Content-Type: application/json
 
 {
-  "userId": "test2",
+  "userId": "User101",
   "password": "1234",
-  "recommendUserId": "test1"
+  "recommendUserId": "User1"
 }
+
+### 남은 이벤트 잔금
+
+GET http://localhost:18080/api/v1/users/event/budget
