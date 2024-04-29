@@ -5,8 +5,8 @@ import jakarta.persistence.Entity
 
 @Entity
 class User(
-    @Column(name = "id", unique = true, nullable = false)
-    val id: String,
+    @Column(name = "user_id", unique = true, nullable = false)
+    val userId: String,
     val password: String,
 ) : BaseEntity() {
 }

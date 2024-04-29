@@ -1,0 +1,24 @@
+### 유저 찾기
+
+GET http://localhost:18080/api/v1/users/User1
+
+### 회원가입 - 추천인 X
+
+POST http://localhost:18080/api/v1/users
+Content-Type: application/json
+
+{
+  "userId": "test1",
+  "password": "1234"
+}
+
+### 회원가입 - 추천인 O
+
+POST http://localhost:18080/api/v1/users
+Content-Type: application/json
+
+{
+  "userId": "test2",
+  "password": "1234",
+  "recommendUserId": "test1"
+}
