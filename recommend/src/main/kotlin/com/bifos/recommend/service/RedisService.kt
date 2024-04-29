@@ -4,6 +4,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
 import java.time.Duration
+import java.time.LocalDateTime
+import java.util.Date
 
 @Service
 class RedisService(
@@ -38,11 +40,19 @@ class RedisService(
     }
 
     private fun lock(key: String, callback: () -> Unit) {
+        val now = Date().time
+
         while (true) {
             val locked = redisTemplate.opsForValue()
                 .setIfAbsent(key, 1, Duration.ofMillis(1000))
             if (locked == true) {
                 break
+            } else {
+                Thread.sleep(10)
+                val after = Date().time
+                if (after - now > 1000) {
+                    throw IllegalStateException("락 획득 불가 with ${now}ms")
+                }
             }
         }
 
