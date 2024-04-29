@@ -1,5 +1,9 @@
 # 추천 시스템
 
+- spring web server
+- mysql
+- redis
+
 ## 요구 사항
 
 - 추천 받는건 유저당 최초 1회만 가능하다
