@@ -23,6 +23,9 @@ services:
     image: fos-recommend-service:0.0.1-SNAPSHOT
     ports:
       - 18080:18080
+    depends_on:
+      - mysql
+      - redis
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/test_db
       - SPRING_DATASOURCE_USERNAME=test_user
