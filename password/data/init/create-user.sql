@@ -1,4 +1,26 @@
 USE mysql;
+create database common default character set utf8;
+create database user_db1 default character set utf8;
+create database user_db2 default character set utf8;
+create database user_db3 default character set utf8;
+create database user_db4 default character set utf8;
+create database user_db5 default character set utf8;
+create database user_db6 default character set utf8;
+create database user_db7 default character set utf8;
+create database user_db8 default character set utf8;
+create database user_db9 default character set utf8;
+create database user_db10 default character set utf8;
+
 CREATE USER 'test_user'@'%' IDENTIFIED BY 'test_password';
-GRANT ALL PRIVILEGES ON *.* TO 'test_db'@'%';
+GRANT ALL PRIVILEGES ON common.* TO 'test_user'@'%';
+GRANT ALL PRIVILEGES ON user_db1.* TO 'test_user'@'%';
+GRANT ALL PRIVILEGES ON user_db2.* TO 'test_user'@'%';
+GRANT ALL PRIVILEGES ON user_db3.* TO 'test_user'@'%';
+GRANT ALL PRIVILEGES ON user_db4.* TO 'test_user'@'%';
+GRANT ALL PRIVILEGES ON user_db5.* TO 'test_user'@'%';
+GRANT ALL PRIVILEGES ON user_db6.* TO 'test_user'@'%';
+GRANT ALL PRIVILEGES ON user_db7.* TO 'test_user'@'%';
+GRANT ALL PRIVILEGES ON user_db8.* TO 'test_user'@'%';
+GRANT ALL PRIVILEGES ON user_db9.* TO 'test_user'@'%';
+GRANT ALL PRIVILEGES ON user_db10.* TO 'test_user'@'%';
 FLUSH PRIVILEGES;
