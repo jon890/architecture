@@ -16,15 +16,21 @@ async function main() {
   });
 
   let interval = 100;
+
   while (interval > 0) {
     console.log(`테스트 수행 ===> interval: ${interval}`);
-    for (let i = 0; i < 100; i++) {
-      const newUser = await client.post("/api/v1/users", {
-        userId: `${Math.random().toString()}`,
-        password: 1234,
-        recommendUserId: "User1",
-      });
-    }
+    await Promise.all(
+      Array(100)
+        .fill(undefined)
+        .map((_) =>
+          client.post("/api/v1/users", {
+            userId: `${Math.random().toString()}`,
+            password: 1234,
+            recommendUserId: "User1",
+          })
+        )
+    );
+
     interval--;
 
     const remainBudget = await client.get("/api/v1/users/event/budget");
