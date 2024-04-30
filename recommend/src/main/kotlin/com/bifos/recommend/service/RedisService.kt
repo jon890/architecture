@@ -3,9 +3,9 @@ package com.bifos.recommend.service
 import org.slf4j.LoggerFactory
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.Duration
-import java.time.LocalDateTime
-import java.util.Date
+import java.util.*
 
 @Service
 class RedisService(
@@ -21,9 +21,9 @@ class RedisService(
         redisTemplate.opsForValue().set(key, value)
     }
 
-    fun minusLongValue(key: String, value: Long) {
+    fun minusLongValue(key: String, value: Long, timeout: Duration) {
         val LOCK_KEY = "LOCK_${key}"
-        lock(LOCK_KEY) {
+        lock(LOCK_KEY, timeout) {
             val currentValue = getLongValue(key)
             if (currentValue == null) {
                 logger.error("해당 key에 대한 값이 존재하지 않습니다 key: {}", key)
@@ -31,7 +31,7 @@ class RedisService(
             }
             val nextValue = currentValue - value
             logger.info("redis value updated with {} ==> {}", currentValue, nextValue)
-            redisTemplate.opsForValue().set(key, nextValue)
+            setLongValue(key, nextValue)
         }
     }
 
@@ -39,7 +39,7 @@ class RedisService(
         redisTemplate.delete(key)
     }
 
-    private fun lock(key: String, callback: () -> Unit) {
+    private fun lock(key: String, timeout: Duration, callback: () -> Unit) {
         val now = Date().time
 
         while (true) {
@@ -50,8 +50,8 @@ class RedisService(
             } else {
                 Thread.sleep(10)
                 val after = Date().time
-                if (after - now > 1000) {
-                    throw IllegalStateException("락 획득 불가 with ${now}ms")
+                if (after - now > timeout.seconds * 1000) {
+                    throw IllegalStateException("락 획득 불가 with ${after - now}ms")
                 }
             }
         }
