@@ -1,9 +1,8 @@
-package com.bifos.recommend.controller
+package com.bifos.password.controller
 
-import com.bifos.recommend.const.RedisKeyConst
-import com.bifos.recommend.controller.dto.UserRegisterRequest
-import com.bifos.recommend.service.RedisService
-import com.bifos.recommend.service.UserService
+
+import com.bifos.password.controller.dto.UserRegisterRequest
+import com.bifos.password.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
@@ -12,13 +11,7 @@ import java.net.URI
 @RequestMapping("/api/v1/users")
 class UserController(
     private val userService: UserService,
-    private val redisService: RedisService,
 ) {
-    @GetMapping("/event/budget")
-    fun getRemainBudget() : ResponseEntity<*>{
-        val budget = redisService.getLongValue(RedisKeyConst.EVENT_RECOMMEND_BUDGET_KEY)
-        return ResponseEntity.ok(budget)
-    }
 
     @GetMapping("{id}")
     fun getUserById(@PathVariable id: String): ResponseEntity<*> {
