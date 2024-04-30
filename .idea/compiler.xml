@@ -5,6 +5,12 @@
       <module name="bifos" target="17" />
       <module name="bifos.main" target="17" />
       <module name="bifos.test" target="17" />
+      <module name="password" target="17" />
+      <module name="password-service" target="17" />
+      <module name="password-service.main" target="17" />
+      <module name="password-service.test" target="17" />
+      <module name="password.main" target="17" />
+      <module name="password.test" target="17" />
       <module name="recommend" target="17" />
       <module name="recommend-service" target="17" />
       <module name="recommend-service.main" target="17" />
