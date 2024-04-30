@@ -1,5 +1,6 @@
-package com.bifos.password.entity
+package com.bifos.password.entity.common
 
+import com.bifos.password.entity.BaseEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 

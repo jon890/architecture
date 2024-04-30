@@ -1,4 +1,4 @@
-package com.bifos.password.config
+package com.bifos.password.config.database
 
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
@@ -43,12 +43,12 @@ class UserDBConfig(
     }
 
     @Bean(name = ["userEntityManager"])
-    override fun entityManager(dataSource: DataSource): LocalContainerEntityManagerFactoryBean {
+    override fun entityManager(@Qualifier("userDataSource") dataSource: DataSource): LocalContainerEntityManagerFactoryBean {
         return super.entityManager(dataSource)
     }
 
     @Bean(name = ["userTransactionManager"])
-    override fun transactionManager(entityManager: LocalContainerEntityManagerFactoryBean): PlatformTransactionManager {
+    override fun transactionManager(@Qualifier("userEntityManager") entityManager: LocalContainerEntityManagerFactoryBean): PlatformTransactionManager {
         return super.transactionManager(entityManager)
     }
 }

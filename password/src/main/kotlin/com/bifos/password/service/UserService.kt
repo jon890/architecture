@@ -1,8 +1,8 @@
 package com.bifos.password.service
 
 import com.bifos.password.controller.dto.UserRegisterRequest
-import com.bifos.password.entity.User
-import com.bifos.password.repository.UserRepository
+import com.bifos.password.entity.common.User
+import com.bifos.password.repository.common.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

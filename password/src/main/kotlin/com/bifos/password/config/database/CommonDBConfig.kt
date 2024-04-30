@@ -1,8 +1,11 @@
 package com.bifos.password.config.database
 
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties
+import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
 import org.springframework.core.env.Environment
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
@@ -11,13 +14,12 @@ import javax.sql.DataSource
 
 @Configuration
 @EnableJpaRepositories(
-    basePackages = ["com.bifos.password.repository.user"],
-    entityManagerFactoryRef = "userEntityManager",
-    transactionManagerRef = "userTransactionManager"
+    basePackages = ["com.bifos.password.repository.common"],
+    entityManagerFactoryRef = "commonEntityManager",
+    transactionManagerRef = "commonTransactionManager"
 )
-class UserDBConfig(
+class CommonDBConfig(
     private val env: Environment,
-    @Qualifier("multiUserDBProperties") private val userDBProperties: List<DBProperty>,
 ) : BaseDBConfig() {
 
     override fun getEnvironment(): Environment {
@@ -25,30 +27,31 @@ class UserDBConfig(
     }
 
     override fun getEntityPackagesToScan(): String {
-        return "com.bifos.password.entity.user"
+        return "com.bifos.password.entity.common"
     }
 
-    @Bean(name = ["userDataSource"])
-    fun userDataSource(): DataSource {
-        val router = DataSourceRouting()
-        val routeMap = mutableMapOf<Any, Any>()
-
-        userDBProperties.forEach {
-            val dataSource = super.dataSource(it.toDatasourceProperties())
-            router.dataSourceKeys.add(it.uniqueResourceName)
-            routeMap[it.uniqueResourceName] = dataSource
-        }
-
-        return router.apply { setTargetDataSources(routeMap) }
+    @Primary
+    @Bean(name = ["commonDatasourceProperties"])
+    @ConfigurationProperties(prefix = "spring.datasource.common")
+    override fun dataSourceProperties(): DataSourceProperties {
+        return super.dataSourceProperties()
     }
 
-    @Bean(name = ["userEntityManager"])
-    override fun entityManager(dataSource: DataSource): LocalContainerEntityManagerFactoryBean {
+    @Primary
+    @Bean(name = ["commonDatasource"])
+    override fun dataSource(@Qualifier("commonDatasourceProperties") properties: DataSourceProperties): DataSource {
+        return super.dataSource(properties)
+    }
+
+    @Primary
+    @Bean(name = ["commonEntityManager"])
+    override fun entityManager(@Qualifier("commonDatasource") dataSource: DataSource): LocalContainerEntityManagerFactoryBean {
         return super.entityManager(dataSource)
     }
 
-    @Bean(name = ["userTransactionManager"])
-    override fun transactionManager(entityManager: LocalContainerEntityManagerFactoryBean): PlatformTransactionManager {
+    @Primary
+    @Bean(name = ["commonTransactionManager"])
+    override fun transactionManager(@Qualifier("commonEntityManager") entityManager: LocalContainerEntityManagerFactoryBean): PlatformTransactionManager {
         return super.transactionManager(entityManager)
     }
 }

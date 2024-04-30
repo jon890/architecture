@@ -1,4 +1,4 @@
-package com.bifos.password.config
+package com.bifos.password.config.database
 
 import com.zaxxer.hikari.HikariDataSource
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties
@@ -30,7 +30,6 @@ abstract class BaseDBConfig : DBConfigurable {
 
             val rootPath = "spring.jpa.properties"
             val properties = listOf(
-                "hibernate.hbm2ddl.auto",
                 "hibernate.dialect",
                 "hibernate.show_sql",
                 "hibernate.format_sql"

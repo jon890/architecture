@@ -1,6 +1,6 @@
 package com.bifos.password.controller.dto
 
-import com.bifos.password.entity.User
+import com.bifos.password.entity.common.User
 import org.springframework.security.crypto.password.PasswordEncoder
 
 data class UserRegisterRequest(

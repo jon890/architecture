@@ -1,4 +1,4 @@
-package com.bifos.password.config
+package com.bifos.password.config.database
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource
 import java.util.regex.Pattern

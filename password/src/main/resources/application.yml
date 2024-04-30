@@ -9,13 +9,57 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
     database: mysql
 
   datasource:
-    url: jdbc:mysql://127.0.0.1:13306/test_db
-    username: test_user
-    password: test_password
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    common:
+      unique-resource-name: commonDataSource
+      url: jdbc:mysql://127.0.0.1:13306/common
+      username: test_user
+      password: test_password
+    multi:
+      user:
+        - unique-resource-name: user1DataSource
+          url: jdbc:mysql://127.0.0.1:13306/user_db1
+          username: test_user
+          password: test_password
+        - unique-resource-name: user2DataSource
+          url: jdbc:mysql://127.0.0.1:13306/user_db2
+          username: test_user
+          password: test_password
+        - unique-resource-name: user3DataSource
+          url: jdbc:mysql://127.0.0.1:13306/user_db3
+          username: test_user
+          password: test_password
+        - unique-resource-name: user4DataSource
+          url: jdbc:mysql://127.0.0.1:13306/user_db4
+          username: test_user
+          password: test_password
+        - unique-resource-name: user5DataSource
+          url: jdbc:mysql://127.0.0.1:13306/user_db5
+          username: test_user
+          password: test_password
+        - unique-resource-name: user6DataSource
+          url: jdbc:mysql://127.0.0.1:13306/user_db6
+          username: test_user
+          password: test_password
+        - unique-resource-name: user7DataSource
+          url: jdbc:mysql://127.0.0.1:13306/user_db7
+          username: test_user
+          password: test_password
+        - unique-resource-name: user8DataSource
+          url: jdbc:mysql://127.0.0.1:13306/user_db8
+          username: test_user
+          password: test_password
+        - unique-resource-name: user9DataSource
+          url: jdbc:mysql://127.0.0.1:13306/user_db9
+          username: test_user
+          password: test_password
+        - unique-resource-name: user10DataSource
+          url: jdbc:mysql://127.0.0.1:13306/user_db10
+          username: test_user
+          password: test_password
 
   data:
     redis:

@@ -1,4 +1,4 @@
-package com.bifos.password.config
+package com.bifos.password.config.database
 
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties
 

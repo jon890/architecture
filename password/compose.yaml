@@ -4,9 +4,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
-      MYSQL_USER: test_user
-      MYSQL_PASSWORD: test_password
-      MYSQL_DATABASE: test_db
+#      MYSQL_USER: test_user
+#      MYSQL_PASSWORD: test_password
+#      MYSQL_DATABASE: common
     ports:
       - 13306:3306
     volumes:
