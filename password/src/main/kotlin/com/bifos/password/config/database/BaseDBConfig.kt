@@ -30,7 +30,7 @@ abstract class BaseDBConfig : DBConfigurable {
 
             val rootPath = "spring.jpa.properties"
             val properties = listOf(
-                "hibernate.dialect",
+                "hibernate.hbm2ddl.auto",
                 "hibernate.show_sql",
                 "hibernate.format_sql"
             ).associateWith { getEnvironment().getProperty("${rootPath}.${it}") }
